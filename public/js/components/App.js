@@ -83,7 +83,6 @@ var Home = function (_Component) {
                             null,
                             'Date'
                         ),
-                        _react2.default.createElement('input', { type: 'text', name: 'date' }),
                         _react2.default.createElement(_reactDatepicker2.default, { selected: this.props.globalState.date, onChange: this.props.handleDateChange }),
                         _react2.default.createElement(
                             'button',
@@ -276,8 +275,12 @@ var Layout = function (_Component) {
   }, {
     key: 'handleDateChange',
     value: function handleDateChange(date) {
+      var _this2 = this;
+
       this.setState({
         date: date
+      }, function () {
+        return console.log(_this2.state);
       });
     }
   }, {

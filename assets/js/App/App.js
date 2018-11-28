@@ -34,7 +34,7 @@ class Layout extends Component {
   handleDateChange(date) {
     this.setState({
       date: date
-    });
+    }, () => console.log(this.state));
   }
 
   render () {
