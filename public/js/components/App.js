@@ -141,10 +141,16 @@ var Results = function (_Component) {
     _this.state = {
       name: 'Harsh'
     };
+    _this.checkGains = _this.checkGains.bind(_this);
     return _this;
   }
 
   _createClass(Results, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+  }, {
     key: 'checkGains',
     value: function checkGains() {
       var percent = this.props.globalState.totalStatus.percent;
@@ -173,7 +179,14 @@ var Results = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'col-md-12' },
-            _react2.default.createElement('div', { className: 'ads' })
+            _react2.default.createElement(
+              'div',
+              { className: 'ads' },
+              _react2.default.createElement('ins', { className: 'adsbygoogle',
+                style: { "display": "block" },
+                google_ad_client: 'ca-pub-3515000550203265',
+                enable_page_level_ads: 'true' })
+            )
           ),
           _react2.default.createElement(
             'div',

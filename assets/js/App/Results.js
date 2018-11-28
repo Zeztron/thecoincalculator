@@ -7,7 +7,13 @@ export default class Results extends Component {
         this.state = {
             name: 'Harsh'
         }
+      this.checkGains = this.checkGains.bind(this)
     }
+    
+
+  componentDidMount() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  }
     checkGains() {
       const { percent } = this.props.globalState.totalStatus
 
@@ -23,6 +29,11 @@ export default class Results extends Component {
             <div className="container">
               <div className="col-md-12">
                 <div className="ads">
+                  <ins className="adsbygoogle"
+                    style = {{"display": "block"}}
+                    google_ad_client= "ca-pub-3515000550203265"
+                    enable_page_level_ads=  "true">
+                  </ins>
                 </div>
               </div>
               <div className="col-md-12">
