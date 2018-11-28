@@ -1,0 +1,60 @@
+@import "reset";
+@import "variables";
+@import "grid";
+@import "home";
+@import "results";
+@import "datepicker";
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: #0f0449; // darker color
+}
+
+header {
+  padding: 17px 0;
+  overflow: auto;
+  color: #fff;
+  .logo {
+    display: inline-block;
+    float: left;
+    font-size: 3rem;
+    font-weight: 100;
+  }
+  .menu {
+    display: inline-block;
+    float: right;
+      a {
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 3px;
+        border: 1px solid #304ffe; // light color pastel-ish
+        color: #304ffe;
+        transition: all .3s ease-in-out;
+        &:hover {
+          background: #304ffe; // light color pastel-ish
+          color: #fff;
+        }
+      }
+  }
+}
+
+.main-btn {
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 3px;
+  border: 1px solid #304ffe; // light color pastel-ish
+  color: #304ffe;
+  transition: all .3s ease-in-out;
+  &:hover {
+    background: #304ffe; // light color pastel-ish
+    color: #fff;
+  }
+  &.active {
+      background: #304ffe;
+      color: white;
+  }
+}
