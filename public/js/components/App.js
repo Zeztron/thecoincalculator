@@ -7,7 +7,7 @@ webpackJsonp([0],{
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -37,65 +37,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Home = function (_Component) {
-    _inherits(Home, _Component);
+  _inherits(Home, _Component);
 
-    function Home() {
-        _classCallCheck(this, Home);
+  function Home() {
+    _classCallCheck(this, Home);
 
-        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
-        _this.state = {
-            name: 'Harsh'
-        };
-        return _this;
+    _this.state = {
+      name: 'Harsh'
+    };
+    return _this;
+  }
+
+  _createClass(Home, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'section',
+        { id: 'home' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-md-6' },
+            _react2.default.createElement('img', { src: '/img/bitcoin-logo.png', className: 'bitcoin-logo' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-md-6' },
+            _react2.default.createElement(
+              'h2',
+              null,
+              'Enter Transaction'
+            ),
+            _react2.default.createElement(
+              'label',
+              null,
+              'Crypto Amount'
+            ),
+            _react2.default.createElement('input', { type: 'text', name: 'amount', onChange: this.props.onInputChange, value: this.props.globalState.cryptoAmount }),
+            _react2.default.createElement(
+              'label',
+              null,
+              'Date'
+            ),
+            _react2.default.createElement(_reactDatepicker2.default, { selected: this.props.globalState.date, onChange: this.props.handleDateChange }),
+            _react2.default.createElement(
+              'button',
+              { type: 'submit', onClick: this.props.checkProfits },
+              'Check Profits'
+            )
+          )
+        )
+      );
     }
+  }]);
 
-    _createClass(Home, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'section',
-                { id: 'home' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'col-md-6' },
-                        _react2.default.createElement('img', { src: '/img/bitcoin-logo.png', className: 'bitcoin-logo' })
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'col-md-6' },
-                        _react2.default.createElement(
-                            'h2',
-                            null,
-                            'Enter Transaction'
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            'Crypto Amount'
-                        ),
-                        _react2.default.createElement('input', { type: 'text', name: 'amount', onChange: this.props.onInputChange, value: this.props.cryptoAmount }),
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            'Date'
-                        ),
-                        _react2.default.createElement(_reactDatepicker2.default, { selected: this.props.globalState.date, onChange: this.props.handleDateChange }),
-                        _react2.default.createElement(
-                            'button',
-                            { type: 'submit' },
-                            'Check Profits'
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Home;
+  return Home;
 }(_react.Component);
 
 exports.default = Home;
@@ -145,8 +145,25 @@ var Results = function (_Component) {
   }
 
   _createClass(Results, [{
+    key: 'checkGains',
+    value: function checkGains() {
+      var percent = this.props.globalState.totalStatus.percent;
+
+
+      if (this.props.globalState.status == 'gain') {
+        return 'You made ' + percent + '% profit';
+      } else {
+        return 'You lost ' + percent + '% of your initial investment';
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _props$globalState$to = this.props.globalState.totalStatus,
+          percent = _props$globalState$to.percent,
+          newCP = _props$globalState$to.newCP,
+          newSP = _props$globalState$to.newSP;
+
       return _react2.default.createElement(
         'section',
         { id: 'results' },
@@ -164,22 +181,30 @@ var Results = function (_Component) {
             _react2.default.createElement(
               'h3',
               null,
-              'Your $1200 dollar investment is now '
+              'Your $',
+              newCP,
+              ' dollar investment is now '
             ),
             _react2.default.createElement(
               'h1',
               null,
-              '$7300'
+              '$',
+              newSP
             ),
             _react2.default.createElement(
               'h4',
               null,
-              'You made a 400% profit!'
+              this.checkGains()
             ),
             _react2.default.createElement(
               'a',
               { href: '#', className: 'main-btn active' },
               'Need to keep track? Create an account with us!'
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: '#', className: 'main-btn', onClick: this.props.goBack },
+              'Or Check Another Transaction'
             )
           ),
           _react2.default.createElement(
@@ -241,7 +266,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=${moment().unix()}&api_key=961d32a441533c3cbd011d28df1297de607a049f6c3181295b46fd247b6c9793
+//https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=${self.state.date.unix()}&api_key=961d32a441533c3cbd011d28df1297de607a049f6c3181295b46fd247b6c9793
+
 
 var Layout = function (_Component) {
   _inherits(Layout, _Component);
@@ -256,19 +283,22 @@ var Layout = function (_Component) {
       location: "home",
       date: (0, _moment2.default)(),
       data: "",
-      cryptoAmount: 1
+      cryptoAmount: 1,
+      status: "",
+      totalStatus: ""
     };
+
     _this.routingSystem = _this.routingSystem.bind(_this);
     _this.handleDateChange = _this.handleDateChange.bind(_this);
-    _this.apiCall = _this.apiCall.bind(_this);
+    _this.checkProfits = _this.checkProfits.bind(_this);
     _this.onInputChange = _this.onInputChange.bind(_this);
+    _this.goBack = _this.goBack.bind(_this);
     return _this;
   }
 
   _createClass(Layout, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      //clearInterval(this.timerID);
       var self = this;
       _axios2.default.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=' + (0, _moment2.default)().unix() + '&api_key=961d32a441533c3cbd011d28df1297de607a049f6c3181295b46fd247b6c9793').then(function (response) {
         self.setState({ btcToday: response.data.BTC }, function () {
@@ -282,15 +312,14 @@ var Layout = function (_Component) {
     key: 'routingSystem',
     value: function routingSystem() {
       switch (this.state.location) {
-        case "home":
-          return _react2.default.createElement(_Home2.default, { handleDateChange: this.handleDateChange, globalState: this.state, onInputChange: this.onInputChange });
+        case 'home':
+          return _react2.default.createElement(_Home2.default, { handleDateChange: this.handleDateChange, globalState: this.state, onInputChange: this.onInputChange, checkProfits: this.checkProfits });
           break;
-        case "results":
-          return _react2.default.createElement(_Results2.default, null);
+        case 'results':
+          return _react2.default.createElement(_Results2.default, { globalState: this.state, goBack: this.goBack });
           break;
         default:
           return _react2.default.createElement(_Home2.default, null);
-
       }
     }
   }, {
@@ -307,41 +336,80 @@ var Layout = function (_Component) {
   }, {
     key: 'onInputChange',
     value: function onInputChange(event) {
-      this.setState = {
+      this.setState({
         cryptoAmount: event.target.value
-      };
+      });
     }
   }, {
-    key: 'apiCall',
-    value: function apiCall() {
-      /*https://min-api.cryptocompare.com/
-      data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=1543338706*/
+    key: 'checkProfits',
+    value: function checkProfits() {
+      //https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=BTC,USD,EUR&ts=1513285669&extraParams=crypto_profits_cp
       var self = this;
-      _axios2.default.get("https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=1543338706&api_key=961d32a441533c3cbd011d28df1297de607a049f6c3181295b46fd247b6c9793").then(function (response) {
+      _axios2.default.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=' + self.state.date.unix() + '&api_key=961d32a441533c3cbd011d28df1297de607a049f6c3181295b46fd247b6c9793').then(function (response) {
         self.setState({ data: response.data.BTC }, function () {
           console.log(self.state);
-          var costPrice = self.state.data.USD;
-          var newCostPrice = 1.5 * 100;
-          newCostPrice = newCostPrice * costPrice / 100;
-          var sellingPrice = self.state.btcToday.USD;
-          var newSellingPrice = 1.5 * 100;
-          newSellingPrice = newSellingPrice * sellingPrice / 100;
-          if (newCostPrice < newSellingPrice) {
-            //Gain
-            var gain = newSellingPrice - newCostPrice;
-            var gainPercentage = gain / newCostPrice * 100;
-            gainPercentage = gainPercentage.toFixed(2);
-            console.log('Profit Percentage is ' + gainPercentage + '%');
+          var CP = self.state.data.USD;
+          var newCP = self.state.cryptoAmount * 100;
+          newCP = newCP * CP / 100;
+          var SP = self.state.btcToday.USD;
+          var newSP = self.state.cryptoAmount * 100;
+          newSP = newSP * SP / 100;
+
+          if (newCP < newSP) {
+            var gain = newSP - newCP;
+            var gainPercent = gain / newCP * 100;
+            gainPercent = gainPercent.toFixed(2);
+            console.log(self.state.cryptoAmount + ' bitcoin newSP: ' + newSP + ', SP: ' + SP + ', newCP: ' + newCP + ', CP: ' + CP);
+            console.log('profit percent is ' + gainPercent);
+            //set state with totals and change location
+            self.setState({
+              location: "results",
+              status: "gain",
+              totalStatus: {
+                newCP: newCP.toFixed(2),
+                CP: CP,
+                newSP: newSP.toFixed(2),
+                SP: SP,
+                percent: gainPercent
+              }
+            }, function () {
+              return console.log(self.state);
+            });
           } else {
-            //Loss
-            var loss = newCostPrice - newSellingPrice;
-            var lossPercentage = loss / newCostPrice * 100;
-            lossPercentage = lossPercentage.toFixed(2);
-            console.log('Loss Percentage is ' + lossPercentage + '%');
+            var loss = newCP - newSP;
+            var lossPercent = loss / newCP * 100;
+            lossPercent = lossPercent.toFixed(2);
+            console.log('loss percent is ' + lossPercent);
+            //set state with totals and change location
+            self.setState({
+              location: "results",
+              status: "loss",
+              totalStatus: {
+                newCP: newCP.toFixed(2),
+                CP: CP,
+                newSP: newSP.toFixed(2),
+                SP: SP,
+                percent: lossPercent
+              }
+            }, function () {
+              return console.log(self.state);
+            });
           }
         });
       }).catch(function (error) {
         console.log(error);
+      });
+    }
+  }, {
+    key: 'goBack',
+    value: function goBack() {
+      this.setState({
+        location: 'home',
+        date: (0, _moment2.default)(),
+        data: '',
+        cryptoAmount: 1,
+        status: '',
+        totalStatus: ''
       });
     }
   }, {
@@ -358,7 +426,7 @@ var Layout = function (_Component) {
             null,
             _react2.default.createElement(
               'div',
-              { className: 'logo', onClick: this.apiCall },
+              { className: 'logo', onClick: this.checkProfits },
               'The Coin ',
               _react2.default.createElement(
                 'span',
