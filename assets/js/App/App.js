@@ -13,11 +13,13 @@ class Layout extends Component {
       name: 'Harsh',
       location: "home",
       date: moment(),
-      data: ""
+      data: "",
+      cryptoAmount: 1
     }
     this.routingSystem = this.routingSystem.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
     this.apiCall = this.apiCall.bind(this)
+    this.onInputChange = this.onInputChange.bind(this)
   }
   
   componentWillMount() {
@@ -38,7 +40,7 @@ class Layout extends Component {
   routingSystem() {
     switch(this.state.location) {
       case "home":
-        return <Home handleDateChange = {this.handleDateChange} globalState={this.state}/>
+        return <Home handleDateChange = {this.handleDateChange} globalState={this.state} onInputChange={this.onInputChange}/>
         break;
       case "results":
         return <Results />
@@ -55,6 +57,12 @@ class Layout extends Component {
     }, () => console.log(this.state.date.unix()));
   }
 
+  onInputChange(event) {
+    this.setState = ({
+      cryptoAmount: event.target.value
+    });
+  }
+
   apiCall() {
     /*https://min-api.cryptocompare.com/
     data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=1543338706*/
@@ -65,17 +73,21 @@ class Layout extends Component {
         self.setState({ data: response.data.BTC }, () => {
           console.log(self.state);
           const costPrice = self.state.data.USD;
+          var newCostPrice = (1.5 * 100);
+          newCostPrice = (newCostPrice * costPrice) / 100;
           const sellingPrice = self.state.btcToday.USD;
-          if (costPrice < sellingPrice) {
+          var newSellingPrice = (1.5 * 100);
+          newSellingPrice = (newSellingPrice * sellingPrice) / 100;
+          if (newCostPrice < newSellingPrice) {
             //Gain
-            var gain = sellingPrice - costPrice;
-            var gainPercentage = (gain / costPrice) * 100;
+            var gain = newSellingPrice - newCostPrice;
+            var gainPercentage = (gain / newCostPrice) * 100;
             gainPercentage = gainPercentage.toFixed(2);
             console.log(`Profit Percentage is ${gainPercentage}%`);
           } else {
             //Loss
-            var loss = costPrice - sellingPrice;
-            var lossPercentage = (loss / costPrice) * 100;
+            var loss = newCostPrice - newSellingPrice;
+            var lossPercentage = (loss / newCostPrice) * 100;
             lossPercentage = lossPercentage.toFixed(2);
             console.log(`Loss Percentage is ${lossPercentage}%`);
           }

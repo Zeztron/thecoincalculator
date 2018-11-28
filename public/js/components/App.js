@@ -77,7 +77,7 @@ var Home = function (_Component) {
                             null,
                             'Crypto Amount'
                         ),
-                        _react2.default.createElement('input', { type: 'text', name: 'amount' }),
+                        _react2.default.createElement('input', { type: 'text', name: 'amount', onChange: this.props.onInputChange, value: this.props.cryptoAmount }),
                         _react2.default.createElement(
                             'label',
                             null,
@@ -255,11 +255,13 @@ var Layout = function (_Component) {
       name: 'Harsh',
       location: "home",
       date: (0, _moment2.default)(),
-      data: ""
+      data: "",
+      cryptoAmount: 1
     };
     _this.routingSystem = _this.routingSystem.bind(_this);
     _this.handleDateChange = _this.handleDateChange.bind(_this);
     _this.apiCall = _this.apiCall.bind(_this);
+    _this.onInputChange = _this.onInputChange.bind(_this);
     return _this;
   }
 
@@ -281,7 +283,7 @@ var Layout = function (_Component) {
     value: function routingSystem() {
       switch (this.state.location) {
         case "home":
-          return _react2.default.createElement(_Home2.default, { handleDateChange: this.handleDateChange, globalState: this.state });
+          return _react2.default.createElement(_Home2.default, { handleDateChange: this.handleDateChange, globalState: this.state, onInputChange: this.onInputChange });
           break;
         case "results":
           return _react2.default.createElement(_Results2.default, null);
@@ -303,6 +305,13 @@ var Layout = function (_Component) {
       });
     }
   }, {
+    key: 'onInputChange',
+    value: function onInputChange(event) {
+      this.setState = {
+        cryptoAmount: event.target.value
+      };
+    }
+  }, {
     key: 'apiCall',
     value: function apiCall() {
       /*https://min-api.cryptocompare.com/
@@ -312,17 +321,21 @@ var Layout = function (_Component) {
         self.setState({ data: response.data.BTC }, function () {
           console.log(self.state);
           var costPrice = self.state.data.USD;
+          var newCostPrice = 1.5 * 100;
+          newCostPrice = newCostPrice * costPrice / 100;
           var sellingPrice = self.state.btcToday.USD;
-          if (costPrice < sellingPrice) {
+          var newSellingPrice = 1.5 * 100;
+          newSellingPrice = newSellingPrice * sellingPrice / 100;
+          if (newCostPrice < newSellingPrice) {
             //Gain
-            var gain = sellingPrice - costPrice;
-            var gainPercentage = gain / costPrice * 100;
+            var gain = newSellingPrice - newCostPrice;
+            var gainPercentage = gain / newCostPrice * 100;
             gainPercentage = gainPercentage.toFixed(2);
             console.log('Profit Percentage is ' + gainPercentage + '%');
           } else {
             //Loss
-            var loss = costPrice - sellingPrice;
-            var lossPercentage = loss / costPrice * 100;
+            var loss = newCostPrice - newSellingPrice;
+            var lossPercentage = loss / newCostPrice * 100;
             lossPercentage = lossPercentage.toFixed(2);
             console.log('Loss Percentage is ' + lossPercentage + '%');
           }
