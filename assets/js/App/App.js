@@ -19,6 +19,21 @@ class Layout extends Component {
     this.handleDateChange = this.handleDateChange.bind(this)
     this.apiCall = this.apiCall.bind(this)
   }
+  
+  componentWillMount() {
+    //clearInterval(this.timerID);
+    var self = this;
+    axios
+      .get(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=${moment().unix()}&api_key=961d32a441533c3cbd011d28df1297de607a049f6c3181295b46fd247b6c9793`)
+      .then(function (response) {
+        self.setState({ btcToday: response.data.BTC }, () => {
+          console.log(self.state);
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   routingSystem() {
     switch(this.state.location) {
@@ -49,6 +64,21 @@ class Layout extends Component {
       .then(function(response) {
         self.setState({ data: response.data.BTC }, () => {
           console.log(self.state);
+          const costPrice = self.state.data.USD;
+          const sellingPrice = self.state.btcToday.USD;
+          if (costPrice < sellingPrice) {
+            //Gain
+            var gain = sellingPrice - costPrice;
+            var gainPercentage = (gain / costPrice) * 100;
+            gainPercentage = gainPercentage.toFixed(2);
+            console.log(`Profit Percentage is ${gainPercentage}%`);
+          } else {
+            //Loss
+            var loss = costPrice - sellingPrice;
+            var lossPercentage = (loss / costPrice) * 100;
+            lossPercentage = lossPercentage.toFixed(2);
+            console.log(`Loss Percentage is ${lossPercentage}%`);
+          }
         });
       })
       .catch(function(error) {
