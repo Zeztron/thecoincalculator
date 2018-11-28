@@ -22,7 +22,8 @@ export default class Results extends Component {
         return <section id="results">
             <div className="container">
               <div className="col-md-12">
-                <div className="ads" />
+                <div className="ads">
+                </div>
               </div>
               <div className="col-md-12">
                 <h3>Your ${newCP} dollar investment is now </h3>
