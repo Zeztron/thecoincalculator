@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import ReactDOM from 'react-dom';
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import axios from "axios";
 import Home from "./Home";
 import Results from "./Results";
 
@@ -11,10 +12,12 @@ class Layout extends Component {
     this.state = {
       name: 'Harsh',
       location: "home",
-      date: moment()
+      date: moment(),
+      data: ""
     }
     this.routingSystem = this.routingSystem.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
+    this.apiCall = this.apiCall.bind(this)
   }
 
   routingSystem() {
@@ -34,15 +37,32 @@ class Layout extends Component {
   handleDateChange(date) {
     this.setState({
       date: date
-    }, () => console.log(this.state));
+    }, () => console.log(this.state.date.unix()));
+  }
+
+  apiCall() {
+    /*https://min-api.cryptocompare.com/
+    data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=1543338706*/
+    var self = this;
+    axios
+      .get("https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD,EUR&ts=1543338706&api_key=961d32a441533c3cbd011d28df1297de607a049f6c3181295b46fd247b6c9793")
+      .then(function(response) {
+        self.setState({ data: response.data.BTC }, () => {
+          console.log(self.state);
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
   }
 
   render () {
     return (<div className='home'>
         <div className="container">
           <header>
-            <div className="logo">
-              The Coin Calculator
+            <div className="logo" onClick={this.apiCall}>
+            The Coin <span className="logo-calculator">Calculator</span>
             </div>
             <nav className="menu">
               <a href="#">Register</a>

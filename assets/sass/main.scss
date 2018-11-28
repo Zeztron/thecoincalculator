@@ -8,7 +8,7 @@
 
 body {
   font-family: 'Raleway', sans-serif;
-  background: #0f0449; // darker color
+  background: #0A1623; // darker color
 }
 
 header {
@@ -19,7 +19,11 @@ header {
     display: inline-block;
     float: left;
     font-size: 3rem;
-    font-weight: 100;
+    font-weight: 500;
+
+    .logo-calculator {
+      color: #00D665;
+    }
   }
   .menu {
     display: inline-block;
@@ -30,11 +34,11 @@ header {
         display: inline-block;
         padding: 10px 20px;
         border-radius: 3px;
-        border: 1px solid #304ffe; // light color pastel-ish
-        color: #304ffe;
+        border: 1px solid #00D665; // light color pastel-ish
+        color: #00D665;
         transition: all .3s ease-in-out;
         &:hover {
-          background: #304ffe; // light color pastel-ish
+          background: #00D665; // light color pastel-ish
           color: #fff;
         }
       }
@@ -47,15 +51,15 @@ header {
   display: inline-block;
   padding: 10px 20px;
   border-radius: 3px;
-  border: 1px solid #304ffe; // light color pastel-ish
-  color: #304ffe;
+  border: 1px solid #00D665; // light color pastel-ish
+  color: #00D665;
   transition: all .3s ease-in-out;
   &:hover {
-    background: #304ffe; // light color pastel-ish
+    background: #00D665; // light color pastel-ish
     color: #fff;
   }
   &.active {
-      background: #304ffe;
+      background: #00D665;
       color: white;
   }
 }
