@@ -1,11 +1,11 @@
 {
-  "name": "CodingPhase-StarterKit",
+  "name": "The coin calculator",
   "version": "1.0.0",
-  "description": "Super Cool Framework",
+  "description": "Calculates bitcoin profit",
   "main": "index.js",
-  "author": "joe santos garcia",
+  "author": "Harsh Patel",
   "license": "MIT",
-  "homepage": "http://rocky.codingphase.com/",
+  "homepage": "http://thecoincalculator.com/",
   "dependencies": {
     "axios": "^0.16.1",
     "babel-core": "^6.24.1",
